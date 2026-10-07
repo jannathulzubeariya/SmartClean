@@ -338,8 +338,23 @@ apiRouter.get('/organize', (req: Request, res: Response) => {
 });
 
 // ----------------- CLEANUP -----------------
-apiRouter.get('/cleanup', (req: Request, res: Response) => {
+apiRouter.get(['/cleanup', '/cleanup/recommendations'], (req: Request, res: Response) => {
   res.json(makeSuccess(scanner.cleanupResult));
+});
+
+// ----------------- IMPORTANT FILES -----------------
+apiRouter.get('/important', (_req: Request, res: Response) => {
+  const importantFiles = scanner.scannedFiles.filter(
+    (f) => (f.importance_score ?? 0) >= 70 || f.importance_label === 'HIGH'
+  );
+  res.json(
+    makeSuccess({
+      items: importantFiles,
+      files: importantFiles,
+      count: importantFiles.length,
+      total: importantFiles.length,
+    })
+  );
 });
 
 // ----------------- ACTIONS (MOVE, QUARANTINE, DELETE, RESTORE, UNDO) -----------------
@@ -651,13 +666,14 @@ apiRouter.post('/quarantine/:q_id/delete', (req: Request, res: Response) => {
   }
 });
 
-// ----------------- HISTORY -----------------
-apiRouter.get('/history', (req: Request, res: Response) => {
+// ----------------- HISTORY & ACTIVITY -----------------
+apiRouter.get(['/history', '/activity'], (req: Request, res: Response) => {
   const limit = parseInt((req.query.limit as string) || '100', 10);
   const items = getHistory(limit);
   res.json(
     makeSuccess({
       history: items,
+      items,
       count: items.length,
     })
   );
