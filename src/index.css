@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #CDD8C2;
+  --paper: #FAF8F1;
+  --paper-2: #F3EFE2;
+  --ink: #1C1C1A;
+  --ink-soft: #4A4A44;
+  --coral: #E0866A;
+  --red: #B8473A;
+  --blue: #3D5BD1;
+  --teal: #B9D1C9;
+}
+
+@layer base {
+  body {
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    background-image: radial-gradient(rgba(28, 28, 26, 0.12) 0.75px, transparent 0.75px);
+    background-size: 24px 24px;
+  }
+
+  h1, h2, h3, h4, .font-serif {
+    font-family: 'Newsreader', 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  h1 {
+    font-size: 48px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  h2 {
+    font-size: 32px;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+  }
+
+  h3 {
+    font-size: 22px;
+    line-height: 1.2;
+  }
+
+  .font-hand {
+    font-family: 'Caveat', cursive;
+    line-height: 1.2;
+  }
+
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* Universal accessible focus ring (Section 9) */
+  :focus-visible {
+    outline: 2px solid var(--ink) !important;
+    outline-offset: 2px !important;
+  }
+}
+
+/* Warm paper card styling (Section 2 & 5) */
+.analog-card {
+  background-color: var(--paper);
+  border: 1.5px solid var(--ink);
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(28, 28, 26, 0.08);
+  position: relative;
+}
+
+.analog-card-alt {
+  background-color: var(--paper-2);
+  border: 1.5px solid var(--ink);
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(28, 28, 26, 0.06);
+  position: relative;
+}
+
+/* Paper grain overlay */
+.paper-grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  border-radius: inherit;
+}
+
+/* Custom Scrollbar for Warm Paper Craft aesthetic */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--paper-2);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--ink);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ink-soft);
+}

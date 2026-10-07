@@ -1,0 +1,8 @@
+{
+  "name": "SmartClean",
+  "description": "Intelligent Storage, Organization & Safe Cleanup System. The computer cleaner that thinks before it cleans.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
